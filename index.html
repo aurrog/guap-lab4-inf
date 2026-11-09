@@ -1162,6 +1162,15 @@ img { max-width: 100%; }
 .tariff-card:hover { transform: translateY(-4px); }
 .tariff-card.featured { border: 2px solid var(--primary); background: linear-gradient(160deg, #19333e, var(--dark-3)); padding: 31px; }
 .tariff-card.featured::before { content: 'ПОПУЛЯРНЫЙ ВЫБОР'; top: -14px; right: 24px; border-radius: 8px; transform: none; padding: 5px 12px; font-size: .65rem; letter-spacing: .06em; background: var(--primary); }
+.tariff-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
 .tariff-name { font-size: 1.5rem; letter-spacing: -.025em; }
 .tariff-desc { min-height: 44px; margin-bottom: 20px; }
 .tariff-price { padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,.1); }
@@ -1403,6 +1412,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--primary); outli
     <div class="pricing-grid">
       <!-- Tariff 1 -->
       <div class="tariff-card">
+        <img class="tariff-photo" src="assets/photos/family.webp" alt="Семья смотрит видео на планшете дома"
+             width="960" height="640" loading="lazy" decoding="async">
         <div class="tariff-name">Старт</div>
         <div class="tariff-desc">Для дома и повседневных задач</div>
         <div class="tariff-price">
@@ -1420,6 +1431,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--primary); outli
 
       <!-- Tariff 2 -->
       <div class="tariff-card featured">
+        <img class="tariff-photo" src="assets/photos/remote-work.webp" alt="Девушка работает за ноутбуком дома"
+             width="960" height="640" loading="lazy" decoding="async">
         <div class="tariff-name">Турбо</div>
         <div class="tariff-desc">Оптимальный для всей семьи</div>
         <div class="tariff-price">
@@ -1438,6 +1451,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--primary); outli
 
       <!-- Tariff 3 -->
       <div class="tariff-card">
+        <img class="tariff-photo" src="assets/photos/gaming.webp" alt="Игрок за компьютером с гоночной игрой на экране"
+             width="960" height="640" loading="lazy" decoding="async">
         <div class="tariff-name">Макс</div>
         <div class="tariff-desc">Для геймеров и профи</div>
         <div class="tariff-price">
