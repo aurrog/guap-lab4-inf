@@ -1415,7 +1415,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--primary); outli
           <li>Антивирус на 1 устройство</li>
           <li>Поддержка в чате и по телефону</li>
         </ul>
-        <button class="tariff-btn secondary" onclick="document.getElementById('contacts').scrollIntoView()">Выбрать тариф</button>
+        <button type="button" class="tariff-btn secondary" data-tariff="start">Выбрать тариф</button>
       </div>
 
       <!-- Tariff 2 -->
@@ -1433,7 +1433,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--primary); outli
           <li>Онлайн-кинотеатр на 6 месяцев</li>
           <li>Приоритетная поддержка</li>
         </ul>
-        <button class="tariff-btn primary" onclick="document.getElementById('contacts').scrollIntoView()">Выбрать тариф</button>
+        <button type="button" class="tariff-btn primary" data-tariff="turbo">Выбрать тариф</button>
       </div>
 
       <!-- Tariff 3 -->
@@ -1451,7 +1451,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--primary); outli
           <li>Антивирус + VPN на 10 устройств</li>
           <li>Пинг от 5 мс до игровых серверов</li>
         </ul>
-        <button class="tariff-btn secondary" onclick="document.getElementById('contacts').scrollIntoView()">Выбрать тариф</button>
+        <button type="button" class="tariff-btn secondary" data-tariff="max">Выбрать тариф</button>
       </div>
     </div>
 
@@ -1579,7 +1579,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--primary); outli
     <div class="section-title">
       <div class="label">Контакты</div>
       <h2>Оформить заявку — просто</h2>
-      <p>Заполните форму или позвоните нам — специалист подберёт тариф и согласует время монтажа.</p>
+      <p>Выберите тариф и проверьте, как выглядит оформление заявки на подключение.</p>
     </div>
     <div class="contact-grid">
       <div class="contact-info">
@@ -1622,7 +1622,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--primary); outli
 
       <form class="contact-form" onsubmit="return submitForm(event)">
         <h3>Заявка на подключение</h3>
-        <p class="sub">Перезвоним в течение 15 минут в рабочее время</p>
+        <p class="sub">Демонстрационная форма. Для проверки используйте вымышленные данные.</p>
         <div class="form-row">
           <div class="form-group">
             <label for="name">Ваше имя</label>
@@ -1649,8 +1649,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--primary); outli
           <label for="comment">Комментарий (необязательно)</label>
           <textarea id="comment" placeholder="Удобное время для звонка, особенности подключения и т.д."></textarea>
         </div>
-        <button type="submit" class="btn btn-primary form-submit">Отправить заявку</button>
-        <p style="font-size:0.8rem;color:var(--gray);text-align:center;margin-top:14px;">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
+        <button type="submit" class="btn btn-primary form-submit">Проверить заявку</button>
+        <p id="form-status" role="status" style="text-align:center;margin-top:14px;"></p>
       </form>
     </div>
   </div>
@@ -1723,18 +1723,25 @@ navMenu.querySelectorAll('a').forEach(function(link) {
   });
 });
 
-// Form submit
+// Pass the selected tariff to the demo form.
+const tariffSelect = document.getElementById('tariff');
+const formStatus = document.getElementById('form-status');
+tariffSelect.form.addEventListener('input', function() {
+  formStatus.textContent = '';
+});
+document.querySelectorAll('.tariff-btn[data-tariff]').forEach(function(button) {
+  button.addEventListener('click', function() {
+    tariffSelect.value = button.dataset.tariff;
+    formStatus.textContent = '';
+    document.getElementById('contacts').scrollIntoView();
+    document.getElementById('name').focus({ preventScroll: true });
+  });
+});
+
+// Demo form
 function submitForm(e) {
   e.preventDefault();
-  var btn = e.target.querySelector('.form-submit');
-  var original = btn.textContent;
-  btn.textContent = '✓ Заявка отправлена!';
-  btn.style.background = 'linear-gradient(135deg, #00d4ff 0%, #00ff88 100%)';
-  setTimeout(function() {
-    btn.textContent = original;
-    btn.style.background = '';
-    e.target.reset();
-  }, 3000);
+  formStatus.textContent = 'Поля проверены. Отправка данных отключена.';
   return false;
 }
 </script>
